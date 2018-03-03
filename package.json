@@ -1,0 +1,53 @@
+{
+  "name": "expensify",
+  "version": "1.0.0",
+  "description": "Expensify application",
+  "main": "index.js",
+  "author": "Andrew Mead",
+  "license": "MIT",
+  "scripts": {
+    "serve": "live-server public/",
+    "build": "webpack --mode development",
+    "dev-server": "webpack-dev-server --mode development --hot",
+    "update:packages": "node wipe-dependencies.js && rm -rf node_modules && npm update --save-dev && npm update --save",
+    "test": "jest --config=jest.config.json --watchAll"
+  },
+  "dependencies": {
+    "babel-cli": "*",
+    "babel-core": "*",
+    "babel-loader": "*",
+    "babel-plugin-transform-class-properties": "*",
+    "babel-preset-env": "*",
+    "babel-preset-react": "*",
+    "css-loader": "*",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.1",
+    "jest": "^22.4.2",
+    "live-server": "*",
+    "moment": "^2.20.1",
+    "node-sass": "*",
+    "normalize.css": "*",
+    "npm": "^5.7.1",
+    "raf": "^3.4.0",
+    "react": "*",
+    "react-addons-shallow-compare": "^15.6.2",
+    "react-dates": "^16.3.6",
+    "react-dom": "*",
+    "react-modal": "*",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.2.2",
+    "react-test-renderer": "^16.2.0",
+    "redux": "^3.7.2",
+    "sass-loader": "*",
+    "style-loader": "*",
+    "uuid": "^3.2.1",
+    "validator": "*",
+    "webpack": "*",
+    "webpack-dev-server": "*"
+  },
+  "devDependencies": {
+    "babel-preset-stage-0": "^6.24.1",
+    "webpack-cli": "^2.0.9"
+  }
+}
