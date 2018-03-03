@@ -14,7 +14,7 @@ import getVisibleExpenses from './selectors/expenses'
 
 // store gets value as return value of function
 const store = configureStore()
-
+console.log('testing')
 const jsx = (
   <Provider store={store}>
     <AppRouter />
