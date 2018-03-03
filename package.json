@@ -13,7 +13,7 @@
     "update:packages":
       "node wipe-dependencies.js && rm -rf node_modules && npm update --save-dev && npm update --save",
     "test": "jest --config=jest.config.json --watchAll",
-    "start": "node serve/server.js",
+    "start": "node server/server.js",
     "heroku-postbuild": "npm run build:prod"
   },
   "dependencies": {
