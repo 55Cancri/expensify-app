@@ -27,6 +27,7 @@
     "node-sass": "*",
     "normalize.css": "*",
     "npm": "^5.7.1",
+    "numeral": "^2.0.6",
     "raf": "^3.4.0",
     "react": "*",
     "react-addons-shallow-compare": "^15.6.2",
