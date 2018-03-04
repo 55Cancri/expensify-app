@@ -11,10 +11,11 @@ import configureStore from './store/configureStore'
 import { addExpense } from './actions/expenses'
 import { setTextFilter } from './actions/filters'
 import getVisibleExpenses from './selectors/expenses'
+import './firebase/firebase'
+// import './playground/promises'
 
 // store gets value as return value of function
 const store = configureStore()
-console.log('testing')
 const jsx = (
   <Provider store={store}>
     <AppRouter />
