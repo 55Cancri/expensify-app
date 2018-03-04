@@ -4,6 +4,7 @@ import ExpenseListItem from './ExpenseListItem.jsx'
 import selectExpenses from '../selectors/expenses'
 
 // this export is for isolated testing
+// props.expenses is the selector in mapStateToProps
 export const ExpenseList = props => (
   // right - no prop name needed, just pass expense
   <div>

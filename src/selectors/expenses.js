@@ -1,5 +1,11 @@
 import moment from 'moment'
 
+/* 
+  Selectors filter state by a filter. An expenses array from state is the first parameter and a filters array from state is the second parameter. Notice below that text, sortBy, startDate, and endDate are all methods to sort a list.
+
+  Selectors are used by components that display things. This selector is used by ExpenseList.jsx to filter out results in the queried list.
+*/
+
 // get visible expenses
 const getVisibleExpenses = (expenses, { text, sortBy, startDate, endDate }) => {
   return expenses
