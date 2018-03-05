@@ -5,13 +5,13 @@ import 'normalize.css/normalize.css'
 import './styles/styles.sass'
 import 'react-dates/lib/css/_datepicker.css'
 
-import AppRouter from './routers/AppRouters.jsx'
+import AppRouter, { history } from './routers/AppRouters.jsx'
 import configureStore from './store/configureStore'
 // import store from './store/configureStore'
 import { startSetExpenses } from './actions/expenses'
-import { setTextFilter } from './actions/filters'
+import { login, logout } from './actions/auth'
 import getVisibleExpenses from './selectors/expenses'
-import './firebase/firebase'
+import { firebase } from './firebase/firebase'
 // import './playground/promises'
 
 // store gets value as return value of function
@@ -22,10 +22,34 @@ const jsx = (
   </Provider>
 )
 
+let hasRendered = false
+const renderApp = () => {
+  if (!hasRendered) {
+    ReactDOM.render(jsx, document.getElementById('app'))
+    hasRendered = true
+  } else {
+  }
+}
+
 ReactDOM.render(<p>Loading...</p>, document.getElementById('app'))
 
-store.dispatch(startSetExpenses()).then(() => {
-  ReactDOM.render(jsx, document.getElementById('app'))
+// runs on user state change
+// because we have custom history, we can now use history.push()
+// to go between pages
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    store.dispatch(login(user.uid))
+    store.dispatch(startSetExpenses()).then(() => {
+      renderApp()
+      if (history.location.pathname === '/') {
+        history.push('/dashboard')
+      }
+    })
+  } else {
+    store.dispatch(logout())
+    renderApp()
+    history.push('/')
+  }
 })
 
 if (module.hot) {
