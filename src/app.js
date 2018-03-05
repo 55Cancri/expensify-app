@@ -8,7 +8,7 @@ import 'react-dates/lib/css/_datepicker.css'
 import AppRouter from './routers/AppRouters.jsx'
 import configureStore from './store/configureStore'
 // import store from './store/configureStore'
-import { addExpense } from './actions/expenses'
+import { startSetExpenses } from './actions/expenses'
 import { setTextFilter } from './actions/filters'
 import getVisibleExpenses from './selectors/expenses'
 import './firebase/firebase'
@@ -22,7 +22,11 @@ const jsx = (
   </Provider>
 )
 
-ReactDOM.render(jsx, document.getElementById('app'))
+ReactDOM.render(<p>Loading...</p>, document.getElementById('app'))
+
+store.dispatch(startSetExpenses()).then(() => {
+  ReactDOM.render(jsx, document.getElementById('app'))
+})
 
 if (module.hot) {
   module.hot.accept()
