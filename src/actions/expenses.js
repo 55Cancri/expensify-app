@@ -32,8 +32,12 @@ export const addExpense = expense => ({
 // note: dispatches ADD_EXPENSE action from inside
 export const startAddExpense = (expenseData = {}) => {
   // redux-think allows return function in action
-  // gives access to dispatch
-  return dispatch => {
+  // gives access to dispatch (and get dispatch)
+  return (dispatch, getState) => {
+    // thunk actions get called with dispatch,
+    // and with getState()
+    const uid = getState().auth.uid
+
     // sets up defaults of what should be received
     const {
       description = '',
@@ -53,7 +57,7 @@ export const startAddExpense = (expenseData = {}) => {
     // access firebase and push new expense
     // by adding 'return', you can now add 'then' in test
     return database
-      .ref('expenses')
+      .ref(`users/${uid}/expenses`)
       .push(expense)
       .then(ref => {
         // finally, dispatch action for redux store
@@ -76,9 +80,11 @@ export const removeExpense = ({ id } = {}) => ({
 })
 
 export const startRemoveExpense = ({ id } = {}) => {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid
+
     return database
-      .ref(`expenses/${id}`)
+      .ref(`users/${uid}/expenses/${id}`)
       .remove()
       .then(() => {
         dispatch(removeExpense({ id }))
@@ -94,9 +100,11 @@ export const editExpense = (id, updates) => ({
 })
 
 export const startEditExpense = (id, updates) => {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid
+
     return database
-      .ref(`expenses/${id}`)
+      .ref(`users/${uid}/expenses/${id}`)
       .update(updates)
       .then(() => {
         dispatch(editExpense(id, updates))
@@ -112,11 +120,12 @@ export const setExpenses = expenses => ({
 
 // startSetExpenses
 export const startSetExpenses = () => {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid
     // return allows access to .then(()) in app.js
     return (
       database
-        .ref('expenses')
+        .ref(`users/${uid}/expenses`)
         .once('value')
         // snapshot returns object structure of firebase
         .then(snapshot => {

@@ -9,6 +9,7 @@ import EditExpensePage from '../components/EditExpensePage.jsx'
 import HelpPage from '../components/HelpPage.jsx'
 import NotFoundPage from '../components/NotFoundPage.jsx'
 import PrivateRoute from './PrivateRoute.jsx'
+import PublicRoute from './PublicRoute.jsx'
 
 // Browser router has its own history that it passes to props
 // this is our own history that we can extend to handle login and logout
@@ -20,7 +21,7 @@ const AppRouter = () => (
   <Router history={history}>
     <div>
       <Switch>
-        <Route exact path="/" component={LoginPage} />
+        <PublicRoute exact path="/" component={LoginPage} />
         <PrivateRoute
           exact
           path="/dashboard"
