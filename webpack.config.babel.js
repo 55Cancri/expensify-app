@@ -16,10 +16,13 @@ if (process.env.NODE_ENV === 'test') {
 // exports function, which exports webconfig object
 module.exports = env => {
   const isProduction = env === 'production'
-  const CSSExtract = new ExtractTextPlugin('styles.css')
+  const CSSExtract = new ExtractTextPlugin({
+    filename: 'styles.css'
+    // disable: !isProduction
+  })
 
   return {
-    entry: './src/app.js',
+    entry: ['babel-polyfill', './src/app.js'],
     output: {
       path: path.join(__dirname, 'public', 'dist'),
       filename: 'bundle.js'
@@ -75,6 +78,8 @@ module.exports = env => {
           process.env.FIREBASE_MESSAGING_SENDER_ID
         )
       })
+      // new webpack.NamedModulesPlugin(),
+      // new webpack.HotModuleReplacementPlugin()
     ],
     // devtool: isProduction ? 'source-map' : 'cheap-module-source-map',
     devtool: isProduction ? 'source-map' : 'inline-source-map',
@@ -83,6 +88,7 @@ module.exports = env => {
       port: 9000,
       historyApiFallback: true,
       publicPath: '/dist/'
+      // hot: true
     }
   }
 }

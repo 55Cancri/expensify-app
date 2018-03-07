@@ -1,4 +1,5 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
+import 'react-redux'
 import thunk from 'redux-thunk'
 import expensesReducer from '../reducers/expenses'
 import filtersReducer from '../reducers/filters'
@@ -16,6 +17,13 @@ export default () => {
     }),
     composeEnhancers(applyMiddleware(thunk))
   )
+
+  // if (module.hot) {
+  //   module.hot.accept('../reducers', () => {
+  //     const nextRootReducer = require('../reducers')
+  //     store.replaceReducer(nextRootReducer)
+  //   })
+  // }
 
   return store
 }

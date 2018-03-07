@@ -1,11 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
+
 import 'normalize.css/normalize.css'
 import './styles/styles.sass'
 import 'react-dates/lib/css/_datepicker.css'
 
 import AppRouter, { history } from './routers/AppRouters.jsx'
+import LoadingPage from './components/LoadingPage.jsx'
 import configureStore from './store/configureStore'
 // import store from './store/configureStore'
 import { startSetExpenses } from './actions/expenses'
@@ -27,11 +29,10 @@ const renderApp = () => {
   if (!hasRendered) {
     ReactDOM.render(jsx, document.getElementById('app'))
     hasRendered = true
-  } else {
   }
 }
 
-ReactDOM.render(<p>Loading...</p>, document.getElementById('app'))
+ReactDOM.render(<LoadingPage />, document.getElementById('app'))
 
 // runs on user state change
 // because we have custom history, we can now use history.push()
@@ -52,9 +53,9 @@ firebase.auth().onAuthStateChanged(user => {
   }
 })
 
-if (module.hot) {
-  module.hot.accept()
-}
+// if (module.hot) {
+//   module.hot.accept()
+// }
 // module.hot.accept('./reducers/expenses', () => {
 //   const nextRootReducer = require('./reducers/filters')
 //   store.replaceReducer(nextRootReducer)

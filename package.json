@@ -8,7 +8,7 @@
   "scripts": {
     "build:dev": "webpack --mode development",
     "build:prod": "webpack -p --env production",
-    "dev-server": "webpack-dev-server --mode development --hot",
+    "dev-server": "webpack-dev-server --mode development --inline --hot",
     "update:packages": "node wipe-dependencies.js && rm -rf node_modules && npm update --save-dev && npm update --save",
     "test": "jest --config=jest.config.json --watchAll",
     "start": "node server/server.js",
@@ -19,6 +19,7 @@
     "babel-core": "*",
     "babel-loader": "*",
     "babel-plugin-transform-class-properties": "*",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "*",
     "babel-preset-react": "*",
     "css-loader": "*",
